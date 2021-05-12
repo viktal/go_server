@@ -8,6 +8,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"log"
 	"math/rand"
+	"net"
 	"net/http"
 	"strconv"
 	"time"
@@ -82,7 +83,17 @@ func init() {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	time.Sleep(time.Duration(rand.Float64() * 3) * time.Second)
-	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+	adders, err := net.InterfaceAddrs()
+	if err != nil {
+		return
+	}
+	for _, a := range adders {
+		if ipnet, ok := a.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			if ipnet.IP.To4() != nil {
+				fmt.Fprintf(w, "Hi, I'm from %s!", ipnet.IP.String())
+			}
+		}
+	}
 }
 
 func main() {
