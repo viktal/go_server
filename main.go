@@ -82,14 +82,14 @@ func init() {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	time.Sleep(time.Duration(rand.Float64() * 2) * time.Second)
-	//randomInt := 10 + rand.Int() * (20 - 10)
-	//fib1 := 1
-	//fib2 := 1
-	//for i := 2; i < randomInt; i ++ {
-	//	fibSum := fib1 + fib2
-	//	fib1 = fib2
-	//	fib2 = fibSum
-	//}
+	randomInt := 10 + rand.Int() * (20 - 10)
+	fib1 := 1
+	fib2 := 1
+	for i := 2; i < randomInt; i ++ {
+		fibSum := fib1 + fib2
+		fib1 = fib2
+		fib2 = fibSum
+	}
 	fmt.Fprintf(w, "Hello World!")
 }
 
