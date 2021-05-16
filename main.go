@@ -10,7 +10,6 @@ import (
 	"math/rand"
 	"net/http"
 	"strconv"
-	"time"
 )
 
 type responseWriter struct {
@@ -81,8 +80,8 @@ func init() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	time.Sleep(time.Duration(rand.Float64() * 2) * time.Second)
-	randomInt := 5 + rand.Intn(10)
+	//time.Sleep(time.Duration(rand.Float64() * 2) * time.Second)
+	randomInt := 10 + rand.Intn(10)
 	fib1 := 1
 	fib2 := 1
 	for i := 2; i < randomInt; i ++ {
